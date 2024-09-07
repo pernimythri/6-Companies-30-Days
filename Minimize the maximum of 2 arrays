@@ -1,0 +1,41 @@
+Time Complexity : O(N)
+
+import java.util.*;
+class Solution {
+    public int minimizeMaximum(int divisor1, int divisor2, int uniqueCnt1, int uniqueCnt2) 
+    {
+        Set<Integer> arr1 = new HashSet<>();
+        Set<Integer> arr2 = new HashSet<>();
+        int currentNum = 1;
+        while (arr1.size() < uniqueCnt1 || arr2.size() < uniqueCnt2)
+        {
+            if (arr1.size() < uniqueCnt1 && currentNum % divisor1 != 0 && !arr2.contains(currentNum)) 
+            {
+                arr1.add(currentNum);
+            } 
+            else if (arr2.size() < uniqueCnt2 && currentNum % divisor2 != 0 && !arr1.contains(currentNum)) 
+            {
+                arr2.add(currentNum);
+            }
+            
+            currentNum++;
+        }
+        
+        return currentNum - 1; 
+    }
+    public static void main(String[] args)
+    {
+        Solution obj = new Solution();
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter Divisor 1: ");
+        int divisor1 = sc.nextInt();
+        System.out.print("Enter Divisor 2: ");
+
+        int divisor2 = sc.nextInt();
+        System.out.print("Enter unique count 1: ");
+        int uniquecnt1= sc.nextInt();
+        System.out.print("Enter unique count 2: ");
+        int uniquecnt2= sc.nextInt();
+        System.out.println("Minimum possible Maximum Integer " + obj.minimizeMaximum(divisor1,divisor2,uniquecnt1,uniquecnt2));
+    }
+}
